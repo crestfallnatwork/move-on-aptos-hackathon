@@ -1,0 +1,15 @@
+[submodule "aptos-mail"]
+	path = aptos-mail
+	url = git@github.com:crestfallnatwork/aptos-mail.git
+[submodule "aces-js"]
+	path = aces-js
+	url = git@github.com:crestfallnatwork/aces-js.git
+[submodule "acmp-js"]
+	path = acmp-js
+	url = git@github.com:crestfallnatwork/acmp-js.git
+[submodule "acksp-js"]
+	path = acksp-js
+	url = git@github.com:crestfallnatwork/acksp-js.git
+[submodule "acmp-contracts"]
+	path = acmp-contracts
+	url = git@github.com:crestfallnatwork/acmp-contracts.git
