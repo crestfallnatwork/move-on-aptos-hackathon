@@ -64,19 +64,19 @@ For a more comprehensive overview look at the [reference implementation](https:/
   
 ### ACKSP
 Aptos Chain Key Sharing Protocol defines a standard way to publish public and optionally encrypted private keys on the blockchain.  
-  
-*Reference Implementation*: [Contract](https://github.com/crestfallnatwork/acmp-contracts/blob/main/acmp/sources/acksp.move), [Client](https://github.com/crestfallnatwork/acksp-js)
+   
+*Reference Implementation*: [Contract](https://github.com/crestfallnatwork/acmp-contracts/blob/main/acmp/sources/acksp.move), [Client](https://github.com/crestfallnatwork/acksp-js)  
 *AIP*: Not implemented yet  
 *White Paper*: Not implemented yet  
-
-Current implementation only supports Ed25519 key pairs but more key types will be supported.
+  
+Current implementation only supports Ed25519 key pairs but more key types will be supported.  
 The contract provides a way to publish keys and retrieve keys. The users are advised to publish their public keys along with their encrypted private keys. Private keys are encrypted using ACES with users own publicEncryptionKey. Look at the reference implementation [here](https://github.com/crestfallnatwork/acmp-contracts/blob/main/acmp/sources/acksp.move)  
 The client extends the functionality by providing a way to retrieve keys valid on a particular timestamp along with a way to create an ACES client based on the stored keys. For more information look at the clients reference implementation [here](https://github.com/crestfallnatwork/acksp-js)  
 
 ### ACMP
 Aptos Chain Mail Protocol defines a standard way to send messages on the blockchain.  
   
-*Reference Implementation*: [Contract](https://github.com/crestfallnatwork/acmp-contracts/blob/main/acmp/sources/acmp.move), [Client](https://github.com/crestfallnatwork/acmp-js)
+*Reference Implementation*: [Contract](https://github.com/crestfallnatwork/acmp-contracts/blob/main/acmp/sources/acmp.move), [Client](https://github.com/crestfallnatwork/acmp-js)  
 *AIP*: Not implemented yet  
 *White Paper*: Not implemented yet  
   
@@ -91,14 +91,14 @@ struct Message has store , copy
     from: address
 }
 ```
-The client packed messages have a special binary encoding. Take a look at the [reference implementation](https://github.com/crestfallnatwork/acmp-js)) for further details.  
+The client packed messages have a special binary encoding. Take a look at the [reference implementation](https://github.com/crestfallnatwork/acmp-js) for further details.  
   
 ### Aptos-Mail  
 Aptos Mail is a simple e2e encrypted email like app that we created to showcase the protocols. It is deployed on the testnet and can be accessed at this [link](https://aptos-mail.vercel.app/). You can also look at the source code [here](https://github.com/crestfallnatwork/aptos-mail)  
 
-Note: Due to no wallets yet supporting the features mentioned in the ACES section, the app requires you to import your private key. Upon import you will be automatically charged APT.
-
-# Further Improvements
+Note: Due to no wallets yet supporting the features mentioned in the ACES section, the app requires you to import your private key. Upon import you will be automatically charged APT.  
+  
+# Further Improvements  
   
 * As mentioned before the protocols are not finalized and would benefit great from community engagement. We have already started working on that.
 * Apart from this a name service protocol would be a great supplement to this suite. 
@@ -106,8 +106,8 @@ Note: Due to no wallets yet supporting the features mentioned in the ACES sectio
 
 # Conculsion
   
-It is our firm belief that the aptos community can benefit from the standardization of these protocols.
-
-For any queries you can reach out to the authors at: 
-[crestfalln](mailto:mail@crestfalln.com)
-[gurshaan](mailto:)
+It is our firm belief that the aptos community can benefit from the standardization of these protocols.  
+  
+For any queries you can reach out to the authors at:  
+[crestfalln](mailto:mail@crestfalln.com)  
+[gurshaan](mailto:)  
