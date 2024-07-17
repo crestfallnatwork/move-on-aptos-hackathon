@@ -14,9 +14,9 @@ There is also a sample Blockchain-Mail app that uses the above protocol to provi
 
 # Introduction
   
-*Problem Statement*: Currently their is no native way for users to encrypt/decrypt data in a universal way on Aptos. This severely limits decentralized app development as users cannot have true ownership over private data. Their is also no standardized messaging scheme that would allow for simple messaging passing.  
+*Problem Statement*: Currently their is no native way for users to encrypt/decrypt data in a universal way on Aptos. This severely limits decentralized app development as users cannot have true ownership over private data. Their is also no standardized messaging scheme that would allow for simple message passing.  
   
-*Objective*: Provide a set of protocols that solve the above issues and in the long term get them standardized  
+*Objective*: Provide a suite of protocols that solve above issues
   
 *Target Audience*: Daap developers, Aptos community
 
@@ -37,10 +37,12 @@ We propose that the following two features be added to the aptos wallet standard
 ecdh(theirPublicKey: Uint8Array): Promise<Uint8Array
 publicEncryptionKey(): Promise<Uint8Array> 
 ```
-*publicEncryptionKey*: this function will return users an x25519 public encryption key which could be used to send them messages. Due to the aptos supporting multiple key types this could not just simply be users public key. Depending on type of keys used by the user, the key can by derived as:  
+*publicEncryptionKey*: this function will return users a public key which could be used to send them messages. Due to the aptos supporting multiple key types this could not just simply be users public key. Depending on type of keys used by the user, the key can by derived as:  
 * secpk1256 keys: take the first 32 bytes of the serialized private key and use it as the private point on Curve25519 and derive the corresponding public key.
 * ed25519 keys: map the ed25519 private key onto the montgomery curve and derive the public key from it.
 * multisig: as of now there is no support for multisig accounts  
+   
+  
 *ecdh*: this function returns the shared secret that is generate by applying the Curve25519 function on a derived private key and the provided Curve25519 public key. The private key derivation is explained in the publicEncryptionKey part.  
 For a reference implementation see this [link](https://github.com/crestfallnatwork/aces-js/blob/main/src/ecdh/impl.ts).
 
@@ -56,14 +58,14 @@ To encrypt a message ACES does the following:
 5. Apply HKDF with secret as (ess | pss), salt as "" and info as "" to derive a 256-bit key.
    * salt and info can be changed depending on application.
 6. Generate a 12 byte IV(iv)
-7. Use AES in GCM mode using IV as iv to generate ciphertext(cm)
+7. Use AES-256 in GCM mode using IV as iv to generate ciphertext(cm)
 8. Encrypted message := (epk | iv | cm)
   
 To decrypt this message follow the steps in reverse.  
 For a more comprehensive overview look at the [reference implementation](https://github.com/crestfallnatwork/aces-js)  
   
 ### ACKSP
-Aptos Chain Key Sharing Protocol defines a standard way to publish public and optionally encrypted private keys on the blockchain.  
+Aptos Chain Key Sharing Protocol defines a standard way to publish public and optionally encrypted private keys on the Aptos blockchain.  
    
 *Reference Implementation*: [Contract](https://github.com/crestfallnatwork/acmp-contracts/blob/main/acmp/sources/acksp.move), [Client](https://github.com/crestfallnatwork/acksp-js)  
 *AIP*: Not implemented yet  
@@ -80,7 +82,7 @@ Aptos Chain Mail Protocol defines a standard way to send messages on the blockch
 *AIP*: Not implemented yet  
 *White Paper*: Not implemented yet  
   
-ACMP uses the blockchain for timestamps and from fields and transportation of the messages and relies on the client to pack and submit messages.  
+ACMP uses the blockchain for timestamps, from fields and transportation of the messages and relies on the client to pack and submit messages.  
 While the protocol does not necessitate encryption, barring any special reasons, we propose that all users should use ACES for e2e encryption along with ACKSP for key retrieval.  
 A message on the blockchain has the following structure:  
 ```move
@@ -100,7 +102,7 @@ Note: Due to no wallets yet supporting the features mentioned in the ACES sectio
   
 # Further Improvements  
   
-* As mentioned before the protocols are not finalized and would benefit great from community engagement. We have already started working on that.
+* As mentioned before the protocols are not finalized and would benefit great from community engagement. We have already started working on this.
 * Apart from this a name service protocol would be a great supplement to this suite. 
 * The Aptos-Mail demonstration app lacks a lot of polish due to time constraints.
 
